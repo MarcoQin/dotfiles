@@ -1,0 +1,9 @@
+# Rime user dictionary
+#@/db_name	easy_en.userdb
+#@/db_type	userdb
+#@/rime_version	1.2.9
+#@/tick	3
+#@/user_id	lin
+clearly 	clearly	c=1 d=0.99005 t=3
+echo 	echo	c=1 d=1 t=3
+emoji 	emoji	c=1 d=0.995012 t=3

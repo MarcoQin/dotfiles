@@ -1,0 +1,64 @@
+﻿# double_pinyin.custom.yaml
+#
+# 補靪功能：將自然碼雙拼的詞庫修改爲朙月拼音擴充詞庫
+#
+# 作者：瑾昀 <cokunhui@gmail.com>
+#
+# 部署位置：
+# ~/.config/ibus/rime  (Linux)
+# ~/Library/Rime  (Mac OS)
+# %APPDATA%\Rime  (Windows)
+#
+# 於重新部署後生效
+#
+#
+# 注意：本補靪適用於所有雙拼方案（「自然碼雙拼」、「智能ABC雙拼」、「小鶴雙拼」、「MSPY雙拼」）。
+# 只須將本 custom.yaml 的前面名字改爲對應的輸入方案名字然後放入用戶文件夾重新部署即可。如 double_pinyin_abc.custom.yaml。
+# 朙月拼音用戶請使用 luna_pinyin.custom.yaml。
+#
+#
+# 附雙拼方案與其對應的 id 一覽表：
+# 輸入方案	id
+# 自然碼雙拼	double_pinyin
+# 智能ABC雙拼	double_pinyin_abc
+# 小鶴雙拼	double_pinyin_flypy
+# MSPY雙拼	double_pinyin_mspy
+#
+
+patch:
+  # 載入朙月拼音擴充詞庫
+  translator/dictionary: luna_pinyin.extended
+
+  # 載入標點
+  punctuator/import_preset: symbols
+  recognizer/patterns/punct: "^/([a-z]+|[0-9])$"
+
+  # 在【朙月拼音】裏使用Emoji表情方案　
+  # 舊版 emoji 0.9.30 使用的 dict 爲 鼠鬚管上的 emoji.dict.yaml 文件
+  # emoji 表情可以直接在 小狼毫中使用，在鼠鬚管上 需主动安装 朙月拼音 bash rime-install luna-pinyin
+  schema/dependencies:
+    - emoji
+  # 是否直接在朙月拼音當中輸入表情
+  abc_segmentor/extra_tags:
+    - reverse_lookup
+  reverse_lookup:
+    dictionary: emoji
+    enable_completion: false
+    prefix: "`"
+    tips: 〔表情〕
+
+  # 加載 easy_en 依賴...
+  # schema/dependencies/@next: easy_en
+  # 載入翻譯英文的碼表翻譯器，取名爲 english
+  # engine/translators/@next: table_translator@english
+  # english 翻譯器的設定項
+  # english:
+    # dictionary: easy_en
+    # spelling_hints: 9
+    # enable_completion: true
+    # enable_sentence: false
+    # initial_quality: -1
+
+  # 新版 emoji，上面舊版爲 0.9.30 通過dict引入的，現在的時 opencc
+  # 只能放到最下面，不然其下面的配置不在生效
+  __include: emoji_suggestion:/patch

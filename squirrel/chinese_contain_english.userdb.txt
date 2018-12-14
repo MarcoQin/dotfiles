@@ -1,0 +1,6 @@
+# Rime user dictionary
+#@/db_name	chinese_contain_english.userdb
+#@/db_type	userdb
+#@/rime_version	1.3.0
+#@/tick	0
+#@/user_id	lin
